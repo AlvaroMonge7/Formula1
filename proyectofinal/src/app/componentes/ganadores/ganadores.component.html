@@ -1,0 +1,18 @@
+<h1>Ganadores Mundiales</h1>
+<div class="row">
+  <div class="card-columns">
+    <div class="card" *ngFor="let ganador of ganadores">
+      <img class="card-img-top" src="../../../assets/img/ganadores/{{ minusculaSinEspacios(ganador.Nombre_piloto) }}.jpg" alt="Card image cap" />
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ ganador.Nombre_piloto }} {{ ganador.apellido }}:
+          {{ mundiales(ganador.mundiales) }}
+        </h5>
+        <h5 class="mundiales" *ngFor="let item of mundialess; let ultimo=last">
+          <span *ngIf="ultimo; else noEsUltimo">{{item}} </span>
+          <ng-template #noEsUltimo><span> {{item}},</span></ng-template>
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>

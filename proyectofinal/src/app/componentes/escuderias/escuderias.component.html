@@ -1,0 +1,9 @@
+<h1>Escuderías</h1>
+<div class="row">
+  <div class="card-columns">
+    <div [routerLink]="['/', 'escuderia', escuderia.Nombre_escuderia]" class="card" *ngFor="let escuderia of escuderias">
+      <img class="card-img-top" src="../../../assets/img/escuderias/{{ minusculaSinEspacios(escuderia.Nombre_escuderia) }}.jpg" alt="Card image cap" />
+    </div>
+  </div>
+</div>
+

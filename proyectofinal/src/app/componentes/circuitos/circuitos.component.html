@@ -1,0 +1,25 @@
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let circuito of circuitos">
+    <div class="card">
+      <img src="../../../assets/img/circuitos/normal/{{minusculaSinEspacios(circuito.ciudad)}}.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{circuito.ciudad}}</h5>
+        <ul>
+          <li>
+            El primer GP en <strong>{{circuito.annoRecord}}</strong>.<br>
+          </li>
+          <li>
+            Tiene <strong>{{circuito.nVueltas}} vueltas</strong> de<strong> {{circuito.distancia}} KM</strong>.<br>
+          </li>
+          <li>
+            La distancia total es de <strong>{{circuito.nVueltas*circuito.distancia | number:'1.3-3'}} KM</strong>.<br>
+          </li>
+          <li>
+            El record <strong>{{circuito.tiempoRecord}}</strong> por <strong>{{circuito.nombre_piloto[0]}}.{{circuito.apellido_piloto}}</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

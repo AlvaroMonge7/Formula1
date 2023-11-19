@@ -1,0 +1,39 @@
+<div class="row" *ngIf="pilotos && pilotos.length > 0">
+  <div class="col-3 piloto piloto1">
+    <h2>
+      <img id="bandera" src="../../assets/img/banderas/{{minusculaSinEspacios(pilotos[0].nacionalidad)}}.png" alt="">
+      {{pilotos[0].Nombre_piloto}}<br> {{pilotos[0].apellido}} {{pilotos[0].dorsal}}
+    </h2>
+    <img [routerLink]="['/', 'piloto', pilotos[0].apellido]" src="../../assets/img/pilotos/{{minusculaSinEspacios(pilotos[0].apellido)}}.png" id="pilotoFoto" style="width: 200px;">
+  </div>
+  <div class="col-6 coche">
+    <img src="../../assets/img/coches/{{minusculaSinEspacios(pilotos[0].Nombre_escuderia)}}.png" id="coche" >
+  </div>
+
+  <div class="col-3 piloto piloto2">
+    <h2>
+      <img id="bandera" src="../../assets/img/banderas/{{minusculaSinEspacios(pilotos[1].nacionalidad)}}.png" alt="">
+      {{pilotos[1].Nombre_piloto}}<br> {{pilotos[1].apellido}} {{pilotos[1].dorsal}}
+    </h2>
+    <img [routerLink]="['/', 'piloto', pilotos[1].apellido]" src="../../assets/img/pilotos/{{minusculaSinEspacios(pilotos[1].apellido)}}.png" id="pilotoFoto" style="width: 200px;">
+  </div>
+</div>
+<table class="col-12 table table-striped table-dark">
+  <tbody>
+    <tr>
+      <th scope="row">Escuderia</th>
+      <td>{{escuderia?.Nombre_escuderia}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Director</th>
+      <td>{{escuderia?.director}}</td>
+    </tr>
+    <tr>
+      <th scope="col">Mundiales</th>
+      <td *ngIf="escuderia?.cantidad_mundiales>0; else ninguno">
+        {{escuderia?.cantidad_mundiales}}
+      </td>
+      <ng-template #ninguno><td>N/A</td></ng-template>
+    </tr>
+  </tbody>
+</table>

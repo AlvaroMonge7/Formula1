@@ -1,0 +1,41 @@
+<div class="row piloto" *ngIf="piloto!!">
+  <div class="col-12 col-md-4">
+    <h2>
+      <img id="bandera" [src]="'../../assets/img/banderas/' + minusculaSinEspacios(piloto.nacionalidad) + '.png'" alt="">
+      {{piloto.Nombre_piloto}} {{piloto.apellido}}
+    </h2>
+    <img src="../../assets/img/pilotos/{{minusculaSinEspacios(piloto.apellido)}}.png" id="pilotoFoto" style="width: 350px;">
+  </div>
+  <div class="col-12 col-xl-8">
+
+    <img [routerLink]="['/', 'escuderia', piloto.Nombre_escuderia]" src="../../assets/img/coches/{{minusculaSinEspacios(piloto.Nombre_escuderia)}}.png" id="coche" >
+  </div>
+
+  <table class="col-12 table table-striped table-dark">
+    <tbody>
+      <tr>
+        <th scope="row">Escuderia</th>
+        <td>{{piloto.Nombre_escuderia}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Pais</th>
+        <td>{{piloto.nacionalidad}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Dorsal</th>
+        <td>{{piloto.dorsal}}</td>
+      </tr>
+      <tr>
+        <th scope="col">Mundiales</th>
+        <td *ngIf="piloto.campeonatos>0; else ninguno">
+          {{piloto.campeonatos}}
+        </td>
+        <ng-template #ninguno><td>N/A</td></ng-template>
+      </tr>
+      <tr>
+        <th scope="col">Edad</th>
+        <td>{{piloto.edad}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

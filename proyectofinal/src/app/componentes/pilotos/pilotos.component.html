@@ -1,0 +1,18 @@
+<div class="pilotos">
+  <div id="piloto" class="{{minusculaSinEspacios(piloto.Nombre_escuderia)}}" *ngFor="let piloto of pilotos;index as i">
+    <div>
+      <div class="a1">
+        <h2>
+          <img id="bandera" src="../../assets/img/banderas/{{minusculaSinEspacios(piloto.nacionalidad)}}.png" alt="">
+          {{piloto.Nombre_piloto}}<br> {{piloto.apellido}}
+        </h2>
+        <h3>{{piloto.dorsal}}</h3>
+        <img [routerLink]="['/', 'piloto', piloto.apellido]"  src="../../assets/img/pilotos/{{minusculaSinEspacios(piloto.apellido)}}.png" id="pilotoFoto">
+      </div>
+      <div class="a2">
+        <img src="../../assets/img/escuderias/{{minusculaSinEspacios(piloto.Nombre_escuderia)}}.jpg" style="width: 180px;">
+      </div>
+    </div>
+  </div>
+</div>
+

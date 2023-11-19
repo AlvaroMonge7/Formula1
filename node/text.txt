@@ -1,0 +1,78 @@
+cron.schedule("*/15 * * * * *", () => {
+  axios
+    .get("https://ergast.com/api/f1/current/last/results")
+    .then((response) => {
+      const res = convert.xml2json(response.data, { compact: true, spaces: 4 });
+      const data = JSON.parse(res);
+      const drivers = data.MRData.RaceTable.Race.ResultsList.Result.map(
+        (result) => ({
+          posicion: result._attributes.position,
+          driverId: result.Driver._attributes.driverId,
+          givenName: result.Driver.GivenName._text,
+          familyName: result.Driver.FamilyName._text,
+          nationality: result.Driver.Nationality._text,
+          //corregir el nombre de la escuderia de la api
+          constructor:result.Constructor.Name._text === "Alpine F1 Team" ? "Alpine" : result.Constructor.Name._text === "Haas F1 Team" ? "Haas" : result.Constructor.Name._text,
+          grid: result.Grid._text,
+          laps: result.Laps._text,
+          status: result.Status._text,
+          puntos: result._attributes.points,
+          tiempo: result.Time ? result.Time._text : "",
+        })
+      );
+
+      if (JSON.stringify(oldDrivers) !== JSON.stringify(drivers)) {
+        oldDrivers = drivers;
+        let fantasies = [];
+        connection.query(
+          `SELECT f.id_fantasy, p.apellido AS piloto1, p2.apellido AS piloto2, p3.apellido AS piloto3, p4.apellido AS piloto4, p5.apellido AS piloto5, e1.Nombre_escuderia AS equipo1, e2.Nombre_escuderia AS equipo2
+            FROM Fantasy f
+            JOIN Piloto p ON f.id_piloto1 = p.id_piloto
+            JOIN Piloto p2 ON f.id_piloto2 = p2.id_piloto
+            JOIN Piloto p3 ON f.id_piloto3 = p3.id_piloto
+            JOIN Piloto p4 ON f.id_piloto4 = p4.id_piloto
+            JOIN Piloto p5 ON f.id_piloto5 = p5.id_piloto
+            JOIN Escuderia e1 ON f.id_equipo1 = e1.id_escuderia
+            JOIN Escuderia e2 ON f.id_equipo2 = e2.id_escuderia;`,
+          (error, rows) => {
+            if (error) throw error;
+
+            rows.forEach((row) => {
+              fantasies.push(row);
+            });
+
+            fantasies.forEach((fantasy) => {
+              let puntos = 0;
+              for (let i = 1; i <= 5; i++) {
+                const piloto = fantasy[`piloto${i}`];
+                console.log(fantasy[`piloto${i}`])
+                const driver = drivers.find(
+                  (driver) => driver.familyName === piloto
+                );
+                if (driver) {
+                  puntos += parseInt(driver.puntos);
+                  if (driver.constructor === fantasy.equipo1 || fantasy.equipo2) {
+                    //suma los la mitad de los puntos que ha conseguido el piloto que pertenece al equipo del fantasy
+                    puntos += parseInt(driver.puntos) / 2;
+                  }
+                }
+              }
+              connection.query(
+                `UPDATE Fantasy SET puntos = ? WHERE id_fantasy = ?`,
+                [puntos, fantasy.id_fantasy],
+                (error, results) => {
+                  if (error) throw error;
+                  console.log(`Se actualizaron ${results.affectedRows} filas`);
+                }
+              );
+            });
+          }
+        );
+      } else {
+        console.log("Los conductores son los mismos que en la última petición");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});

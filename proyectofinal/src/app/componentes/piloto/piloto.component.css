@@ -1,0 +1,32 @@
+#bandera{
+  width: 60px;
+}
+h2{
+  color: white;
+}
+
+.piloto{
+  text-align: center;
+  align-items: center;
+}
+
+table{
+  margin-top: 20px;
+}
+
+#coche{
+  width: 700px;
+  margin-top: 13%;
+  margin-left: 5%;
+}
+
+@media(max-width:854px){
+  #coche{
+    width: 500px;
+  }
+}
+@media(max-width:554px){
+  #coche{
+    width: 300px;
+  }
+}

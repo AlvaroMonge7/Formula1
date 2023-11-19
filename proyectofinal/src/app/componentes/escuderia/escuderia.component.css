@@ -1,0 +1,74 @@
+#bandera{
+  width: 60px;
+}
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.coche{
+  position: relative;
+  text-align: center;
+}
+
+.table{
+  margin-top: 100px;
+}
+h2{
+  color: white;
+}
+.coche>img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-58%,-80%);
+  width: 600px;
+}
+#coche{
+  width: 700px;
+  margin-top: 13%;
+  margin-left: 5%;
+}
+
+.piloto{
+  margin-bottom: 20px;
+}
+
+@media(max-width:1250px){
+  #coche{
+    width: 500px;
+  }
+}
+@media(max-width:554px){
+  #coche{
+    width: 300px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .piloto1 {
+    order: 2;
+    margin-left: -150px;
+  }
+
+  .coche {
+    order: 3;
+  }
+
+  .coche>img{
+    transform: translate(-58%,-30%);
+  }
+
+  .piloto2 {
+    order: 1;
+    margin-left: -150px;
+  }
+}
+

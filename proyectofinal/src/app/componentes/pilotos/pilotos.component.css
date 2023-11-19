@@ -1,0 +1,98 @@
+
+.pilotos{
+  margin-left: 6%;
+}
+#piloto{
+  width: 250px;
+  display: inline-block;
+  margin: 30px;
+  border-radius: 33px;
+}
+#bandera{
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  margin-left: 5px;
+  border-radius: 15px;
+}
+#pilotoFoto{
+  width: 210px;
+  position: absolute;
+  top: 27%;
+  left: 15%;
+  transition: transform 1s;
+}
+.a1:hover>#pilotoFoto{
+  transform: scale(1.1);
+}
+
+#AstonMartin{
+  font-size: x-large;
+}
+h3{
+  margin-left: 20px;
+}
+.a1{
+  color: white;
+  background-color: #000000;
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  -webkit-transition: background-color 1s linear;
+  transition: background-color 1s linear;
+  border-radius: 30px 30px 0px 0px;
+}
+.a2{
+  color: white;
+  border: solid 1px #393939;
+  background-color: #393939;
+  position: relative;
+  border-radius: 0px 0px 30px 30px;
+  height: 150px;
+}
+.a2>img{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin-top: 0px;
+}
+.a2>p{
+  margin-top: 130px;
+  margin-left: 10px;
+}
+
+.astonMartin div.a1:hover{
+  background-color: #00453a;
+}
+.mercedes div.a1:hover{
+  background-color: #00c0a0;
+}
+.redBull div.a1:hover{
+  background-color: #000038;
+}
+.ferrari div.a1:hover{
+  background-color: rgb(141, 0, 0);
+}
+.alfaRomeo div.a1:hover{
+  background-color: rgb(133, 45, 45);
+}
+.hass div.a1:hover{
+  background-color: rgb(161, 161, 161);
+}
+.williams div.a1:hover{
+  background-color: rgb(1, 51, 145);
+}
+.alpine div.a1:hover{
+  background-color: rgb(62, 130, 255);
+}
+.mcLaren div.a1:hover{
+  background-color: rgb(197, 106, 32);
+}
+.alphaTauri div.a1:hover{
+  background-color: rgb(14, 0, 143);
+}
+
+h2{
+  padding-left: 10px;
+}
